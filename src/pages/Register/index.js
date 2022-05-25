@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { apiPost } from "../../services/api";
+import { useState } from "react";
+import usersApi from "../../services/api/userApi";
 
 function RegisterPage() {
   const [email, setEmail] = useState("");
@@ -9,21 +9,7 @@ function RegisterPage() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const user = {
-      name,
-      email,
-      password,
-      password_confirmation: passwordConfirmation,
-    };
-    apiPost("/users", { user }).then(
-      (response) => {
-        console.log("this", response);
-      },
-      (error) => {
-        console.log(error);
-        alert(error.request.responseText)
-      }
-    );
+    usersApi.postCreateUser(name, email, password, passwordConfirmation);
   };
 
   return (
