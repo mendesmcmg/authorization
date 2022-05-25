@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { apiGet } from "../../services/api";
+import { apiPost } from "../../services/api";
 
 function RegisterPage() {
   const [email, setEmail] = useState("");
@@ -7,20 +7,23 @@ function RegisterPage() {
   const [password, setPassword] = useState("");
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
 
-  useEffect(() => {
-    console.log("RegisterPage mounted");
-    apiGet("/users").then((response) => {
-      console.log("this", response);
-    }, (error) => {
-      console.log(error);
-    }
-    );
-  }, []);
-
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("RegisterPage handleSubmit");
-  
+    const user = {
+      name,
+      email,
+      password,
+      password_confirmation: passwordConfirmation,
+    };
+    apiPost("/users", { user }).then(
+      (response) => {
+        console.log("this", response);
+      },
+      (error) => {
+        console.log(error);
+        alert(error.request.responseText)
+      }
+    );
   };
 
   return (
@@ -64,7 +67,9 @@ function RegisterPage() {
           />
         </label>
         <br />
-        <button type="submit" onClick={handleSubmit}>Register</button>
+        <button type="submit" onClick={handleSubmit}>
+          Register
+        </button>
       </form>
     </div>
   );
