@@ -1,7 +1,14 @@
+import { useEffect } from "react";
+
 function Home() {
+  useEffect(() => {
+    console.log("Home");
+    }, []);
+    
+    
   return (
     <div>
-      <h1>Homiiie</h1>
+      <h1>Home</h1>
       pelo amor de Deus
     </div>
   );

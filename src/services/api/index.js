@@ -1,10 +1,13 @@
+import axios from "axios";
+
 export const baseURL =
   "http://ec2-18-231-30-2.sa-east-1.compute.amazonaws.com/";
 
-const api = Axios.create({
+export const api = axios.create({
   baseURL,
   headers: {
     "Content-Type": "application/json",
+    "Access-Control-Allow-Origin": "*"
   },
   validateStatus: (status) => status >= 200 && status < 300,
 });

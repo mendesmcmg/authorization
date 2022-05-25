@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { apiGet } from "../../services/api";
 
 function RegisterPage() {
   const [email, setEmail] = useState("");
@@ -8,11 +9,18 @@ function RegisterPage() {
 
   useEffect(() => {
     console.log("RegisterPage mounted");
+    apiGet("/users").then((response) => {
+      console.log("this", response);
+    }, (error) => {
+      console.log(error);
+    }
+    );
   }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("RegisterPage handleSubmit");
+  
   };
 
   return (
@@ -56,7 +64,7 @@ function RegisterPage() {
           />
         </label>
         <br />
-        <button type="submit">Register</button>
+        <button type="submit" onClick={handleSubmit}>Register</button>
       </form>
     </div>
   );
