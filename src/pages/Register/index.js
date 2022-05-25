@@ -9,7 +9,15 @@ function RegisterPage() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    usersApi.postCreateUser(name, email, password, passwordConfirmation);
+    usersApi.postCreateUser(
+      name,
+      email,
+      password,
+      passwordConfirmation,
+      (res) => {
+        console.log(res);
+      }
+    );
   };
 
   return (

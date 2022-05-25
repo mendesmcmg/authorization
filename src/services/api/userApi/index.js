@@ -1,7 +1,7 @@
 import { apiPost } from "..";
 
 const usersApi = {
-  postCreateUser: (name, email, password, passwordConfirmation) => {
+  postCreateUser: (name, email, password, passwordConfirmation, func) => {
     const user = {
       name,
       email,
@@ -11,10 +11,10 @@ const usersApi = {
 
     apiPost("/users", { user }).then(
       (response) => {
-        console.log("this", response);
+        func(response);
       },
       (error) => {
-        console.log(error);
+        func(error);
         alert(error.request.responseText);
       }
     );
